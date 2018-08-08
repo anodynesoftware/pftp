@@ -1,0 +1,14 @@
+PFTP.TTP
+.C	[-aw -b4 -r6 -w -cf -cu -d1 -fl -m0 -rs -fm]
+.S	[-m0]
+=
+CS.O
+FTPMAIN.C	(FTP.H)
+FTPEDIT.C	(FTP.H)
+FTPINT.C	(FTP.H)
+FTPPARSE.C	(FTP.H)
+FTPSTING.C	(FTP.H)
+FTPUTIL.C	(FTP.H)
+FTPASM.S
+LCMS.LIB
+LCS.LIB

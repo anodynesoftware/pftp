@@ -1,0 +1,206 @@
+Documentation for pftp/pftpstik
+===============================
+Both pftp and pftpstik are FTP clients for use with plain TOS.  The only
+difference between the two is that pftp uses some STinG extensions and
+so can only be used with STinG.  pftpstik should work with either.  In
+the following document, unless otherwise specified, pftp means pftp OR
+pftpstik.
+
+SYNOPSIS
+     pftp [-pinegvd] [host [port]]
+
+DESCRIPTION
+     Options may be specified at the command line, or to the command
+     interpreter.
+
+     -p    Don't use passive mode for data transfers.  By default, passive
+           mode is used, which allows the use of ftp in environments
+           where a firewall prevents connections from the outside world
+           back to the client machine.  Passive mode requires that the
+           ftp server support the PASV command; if the server doesn't,
+           use this option.
+
+     -i    Turns off interactive prompting during multiple file transfers.
+
+     -g    Disables file name globbing.
+
+     -v    Verbose option forces ftp to show all responses from the remote
+           server, as well as report on data transfer statistics.
+
+     -d    Enables debugging.
+
+     The client host and an optional port number with which pftp is to
+     communicate may be specified on the command line.  If this is done,
+     pftp will immediately attempt to establish a connection to an FTP
+     server on that host; otherwise, pftp will enter its command interpreter
+     and await instructions from the user.  When pftp is awaiting commands
+     from the user, the prompt "ftp>" is provided to the user.  The
+     following commands are recognized by pftp:
+
+     ascii       Set the file transfer type to network ASCII.
+
+     bell        Arrange that a bell be sounded after each file transfer
+                 command is completed.
+
+     binary      Set the file transfer type to support binary image
+                 transfer.  This is the default type.
+
+     bye         Terminate the FTP session with the remote server and exit
+                 pftp.
+
+     cd remote-directory
+                 Change the working directory on the remote machine to
+                 remote-directory.
+
+     cdup        Change the remote machine working directory to the parent
+                 of the current remote machine working directory.
+
+     close       Terminate the FTP session with the remote server, and
+                 return to TOS.
+
+     delete remote-file
+                 Delete the file remote-file on the remote machine.
+
+     debug [debug-value]
+                 Toggle debugging mode.  If an optional debug-value is
+                 specified it is used to set the debugging level.  When
+                 debugging is on, pftp prints each command sent to the
+                 remote machine, preceded by the string "--->".
+
+     dir [remote-directory [local-file]]
+                 Print a listing of the contents of remote-directory, and,
+                 optionally, place the output in local-file.  If no local
+                 file is specified, output comes to the terminal.  If no
+                 directory is specified, the current working directory on
+                 the remote machine is used.
+
+     disconnect  A synonym for close.
+
+     get remote-file [local-file]
+                 Retrieve the remote-file and store it on the local machine.
+                 If the local file name is not specified, it is given the
+                 same name it has on the remote machine.  The current
+                 setting for type is used while transferring the file.
+
+     glob        Toggle filename expansion for mdelete, mget and mput.  If
+                 globbing is turned off with glob, the file name arguments
+                 are taken literally and not expanded.  Globbing for mput is
+                 done using standard TOS wildcards.  For mdelete and mget,
+                 each remote file name is expanded separately on the remote
+                 machine and the lists are not merged.
+
+     help [command]
+                 Print an informative message about the meaning of command.
+                 If no argument is given, pftp prints a list of the known
+                 commands.
+
+     lcd [directory]
+                 Change the working directory on the local machine.  If no
+                 directory is specified, the directory used is the one that
+                 was current when pftp was started.
+
+     ls [remote-directory [local-file]]
+                 Print a listing of the contents of a directory on the
+                 remote machine.  The listing includes any system-dependent
+                 information that the server chooses to include; for
+                 example, most UNIX systems will produce output from the
+                 command "ls -l" (see also nlist).  If no local file is
+                 specified, the output is sent to the terminal.  If
+                 remote-directory is left unspecified, the current working
+                 directory is used.
+
+     mdelete [remote-files]
+                 Delete the remote-files on the remote machine.
+
+     mget remote-files
+                 Expand the remote-files on the remote machine and do a get
+                 for each file name thus produced.  See glob for details on
+                 the filename expansion.  Files are transferred into the
+                 local working directory, which can be changed with the
+                 lcd command.
+
+     mkdir directory-name
+                 Make a directory on the remote machine.
+
+     mput local-files
+                 Expand wild cards in the list of local files given as
+                 arguments and do a put for each file in the resulting list.
+                 See glob for details of filename expansion.
+
+     nlist [remote-directory [local-file]]
+                 Print a list of the files in a directory on the remote
+                 machine.  If no local file is specified, the output is sent
+                 to the terminal.  If remote-directory is left unspecified,
+                 the current working directory is used.
+
+     open host [port]
+                 Establish a connection to the specified host FTP server.
+                 An optional port number may be supplied, in which case
+                 pftp will attempt to contact an FTP server at that port.
+
+     prompt      Toggle interactive prompting.  Interactive prompting occurs
+                 during multiple file transfers to allow the user to selec‐
+                 tively retrieve or store files.  If prompting is turned off
+                 (default is on), any mget or mput will transfer all files,
+                 and any mdelete will delete all files.
+
+     put local-file [remote-file]
+                 Store a local file on the remote machine.  If remote-file is
+                 left unspecified, the local file name is used, excluding the
+                 path prefix.  File transfer uses the current settings for type.
+
+     pwd         Print the name of the current working directory on the remote
+                 machine.
+
+     quit        A synonym for bye.
+
+     recv remote-file [local-file]
+                 A synonym for get.
+
+     rename from-name to-name
+                 Rename the file from-name on the remote machine, to the file
+                 to-name.
+
+     rmdir directory-name
+                 Delete a directory on the remote machine.
+
+     send local-file [remote-file]
+                 A synonym for put.
+
+     status      Show the current status of ftp.
+
+     system      Show the type of operating system running on the remote
+                 machine.
+
+     type [type-name]
+                 Set the file transfer type to type-name.  If no type is
+                 specified, the current type is printed.  The default type
+                 is network ASCII.
+
+     verbose     Toggle verbose mode.  In verbose mode, all responses from
+                 the FTP server are displayed to the user.  In addition, if
+                 verbose is on, when a file transfer completes, statistics
+                 regarding the efficiency of the transfer are reported.  By
+                 default, verbose is on.
+
+     ? [command]
+                 A synonym for help.
+
+     Command arguments which have embedded spaces may be quoted with quote
+     marks (").
+
+ABORTING A FILE TRANSFER
+     To abort a file transfer, use Ctrl-C.  Sending transfers will be
+     immediately halted.  Receiving transfers will be halted by sending an
+     ftp protocol ABOR command to the remote server, and discarding any
+     further data received.
+
+FILE TRANSFER PARAMETERS
+     The FTP specification specifies many parameters which may affect a file
+     transfer.  The pftp program supports only the "ascii" and "image" types
+     of file transfer, plus the default values for the remaining file
+     transfer parameters.
+
+BUGS
+     Correct execution of many commands depends upon proper behaviour by the
+     remote server.
