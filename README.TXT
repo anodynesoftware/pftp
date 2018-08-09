@@ -9,3 +9,6 @@ This code was written for Lattice C 5.60, using the following options to
 handle the STiK/STinG API:
 	-w	default short integers
 	-aw	type-based stack alignment
+
+Note that all files except this one and LICENSE.TXT use cr/lf line
+endings, since they are set up for compilation on an Atari system.
